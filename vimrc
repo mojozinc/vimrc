@@ -12,6 +12,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mcchrish/nnn.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'mileszs/ack.vim'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=%{FugitiveStatusline()}
