@@ -13,7 +13,8 @@ Plug 'mcchrish/nnn.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'mileszs/ack.vim'
-"Plug 'voldikss/vim-floaterm'
+Plug 'skywind3000/vim-preview'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=%{FugitiveStatusline()}
@@ -32,6 +33,10 @@ autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
 autocmd FileType jsonl nnoremap <buffer> <F5> :call JsonLineView()<CR>
 autocmd BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
+
+" to preview ack results
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 """"""""""""""""""""display whitespace character"""""""""""""""""""""""""""""""
 " set list 
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
