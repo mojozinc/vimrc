@@ -13,9 +13,23 @@ Plug 'mcchrish/nnn.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'mileszs/ack.vim'
+"Plug 'voldikss/vim-floaterm'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=%{FugitiveStatusline()}
+""""""Custom functions""""""""""""""""""""""""""""""""
+function SetJsonLOptions()
+    set filetype=jsonl
+    set syntax=json
+endfunction
+
+function JsonLineView()
+     y | tabnew | 0put | .!python -m json.tool
+     set filetype=json
+endfunction
+
+autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
+autocmd FileType jsonl nnoremap <buffer> <F5> :call JsonLineView()<CR>
 """"""""""""""""""""display whitespace character"""""""""""""""""""""""""""""""
 " set list 
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
@@ -34,7 +48,7 @@ vnoremap <silent> # :s/^/#/<cr>:noh<cr>
 vnoremap <silent> -# :s/^#//<cr>:noh<cr>
 """""""""""""""""""""""""""""""""""""""""""""""
 """" key bindings""""""""""""""""""""""""""""""
-:let mapleader = ","
+let mapleader = ","
 " open fzf finder, simulate cmd+shift+p
 nnoremap <leader>p :Files<CR>
 " nnn file manager
