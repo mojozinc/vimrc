@@ -30,6 +30,8 @@ endfunction
 
 autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
 autocmd FileType jsonl nnoremap <buffer> <F5> :call JsonLineView()<CR>
+autocmd BufNewFile,BufRead Dockerfile* set filetype=dockerfile
+autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
 """"""""""""""""""""display whitespace character"""""""""""""""""""""""""""""""
 " set list 
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
