@@ -1,0 +1,10 @@
+Ctrl-O / I -> move up and down the last cursor position stack
+gt / gT -> switch to next previous tabs
+#gt -> go to tab at # position
+block comments in python -> 
+	1. select the block with Shift/Ctrl-V
+	2. :norm i# comment
+	3. :norm ^x uncomment
+type ctrl-N/P - automcomplete
+:mksession <filename>.vim save the current vim session 
+:qa - quit all open files
