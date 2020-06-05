@@ -10,6 +10,11 @@ Plug 'mbbill/undotree'
 "Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'machakann/vim-highlightedyank'
 call plug#end()
+
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=%{FugitiveStatusline()}
 """"""Custom functions""""""""""""""""""""""""""""""""
@@ -27,6 +32,13 @@ autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
 autocmd FileType jsonl nnoremap <buffer> <F5> :call JsonLineView()<CR>
 autocmd BufNewFile,BufRead Dockerfile* set filetype=dockerfile
 autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
+
+" toggle relativenumber
+augroup numbertoggle
+    au!
+    autocmd BufEnter,FocusGained * set relativenumber
+    autocmd BufLeave,FocusLost * set norelativenumber
+augroup END
 
 " to preview ack results
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
@@ -52,13 +64,12 @@ vnoremap <silent> -# :s/^#//<cr>:noh<cr>
 let mapleader = ","
 " open fzf finder, simulate cmd+shift+p
 nnoremap <leader>p :Files<CR>
-" nnn file manager
-let g:nnn#set_default_mappings = 0
-nnoremap <leader>nn :NnnPicker<CR>
+nnoremap <leader>f :Rg<SPACE>
+
 """"""""""""""""""""""""""""""""""""""""""""""
 """" Defaults"""""
 syntax on
-set number " line numbers
+set number relativenumber " line numbers
 set hlsearch " highlight searched text
 set incsearch " search text incrementally
 set ignorecase " case insensitive search
@@ -71,6 +82,6 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 
-set colorcolumn=80
-highlight ColorColumn ctermbg=7
+"set colorcolumn=80
+"highlight ColorColumn ctermbg=7
 
