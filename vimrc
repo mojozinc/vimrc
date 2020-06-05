@@ -1,19 +1,13 @@
-set number " line numbers
-set hlsearch " highlight searched text
-set incsearch " search text incrementally
-set ignorecase " case insensitive search
-set smartcase
-syntax on
-set tabstop=4 shiftwidth=4 expandtab
 """"""""""""""""Plugins""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'mcchrish/nnn.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
-Plug 'mileszs/ack.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'skywind3000/vim-preview'
+Plug 'mbbill/undotree'
+"Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'machakann/vim-highlightedyank'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,3 +56,21 @@ nnoremap <leader>p :Files<CR>
 let g:nnn#set_default_mappings = 0
 nnoremap <leader>nn :NnnPicker<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
+"""" Defaults"""""
+syntax on
+set number " line numbers
+set hlsearch " highlight searched text
+set incsearch " search text incrementally
+set ignorecase " case insensitive search
+set smartcase
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set smartindent
+set nowrap
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=7
+
