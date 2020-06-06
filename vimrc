@@ -2,13 +2,16 @@
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
 Plug 'jremmen/vim-ripgrep'
-Plug 'skywind3000/vim-preview'
-Plug 'mbbill/undotree'
-"Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'machakann/vim-highlightedyank'
+Plug 'vim-airline/vim-airline'
+Plug 'skywind3000/vim-preview'
+Plug 'lifepillar/vim-mucomplete'
+" needs nvim
+" Plug 'ThePrimeagen/vim-be-good'
+"Plug 'git@github.com:Valloric/YouCompleteMe.git'
 call plug#end()
 
 if executable('rg')
@@ -17,6 +20,52 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline=%{FugitiveStatusline()}
+""""""""""""""""""""display whitespace character"""""""""""""""""""""""""""""""
+" set list 
+" set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Color schemes""""""""""""""""""""""""""""""""
+" colo one-dark
+" colo atom
+colo gruvbox
+" colo dracula
+"""""""""""""""""""""""""""""""""""""""""""""""
+""""""Python configs"""""""""""""""""""""""""""
+let python_highlight_all=1
+set backspace=2
+set completeopt=menuone,noinsert
+"""""""""""""""""""""""""""""""""""""""""""""""
+""""""" block commenting"""""""""""""""""""""""
+vnoremap <silent> # :s/^/#/<cr>:noh<cr>
+vnoremap <silent> -# :s/^#//<cr>:noh<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""
+"""" key bindings""""""""""""""""""""""""""""""
+let mapleader = ","
+" open fzf finder, simulate cmd+shift+p
+nmap <leader>p :Files<CR>
+nmap <leader>f :Rg<SPACE>
+map <C-d> :NERDTreeToggle<CR>
+""""""""""""""""""""""""""""""""""""""""""""""
+"""" Defaults"""""
+syntax on
+set number relativenumber " line numbers
+set hlsearch " highlight searched text
+set incsearch " search text incrementally
+set ignorecase " case insensitive search
+set smartcase
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set smartindent
+set nowrap
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set cursorline
+
+
+"set colorcolumn=80
+"highlight ColorColumn ctermbg=7
+
 """"""Custom functions""""""""""""""""""""""""""""""""
 function SetJsonLOptions()
     set filetype=jsonl
@@ -43,45 +92,5 @@ augroup END
 " to preview ack results
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
-""""""""""""""""""""display whitespace character"""""""""""""""""""""""""""""""
-" set list 
-" set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Color schemes""""""""""""""""""""""""""""""""
-" colo one-dark
-colo atom
-" colo dracula
-"""""""""""""""""""""""""""""""""""""""""""""""
-""""""Python configs"""""""""""""""""""""""""""
-let python_highlight_all=1
-set backspace=2
-"""""""""""""""""""""""""""""""""""""""""""""""
-""""""" block commenting"""""""""""""""""""""""
-vnoremap <silent> # :s/^/#/<cr>:noh<cr>
-vnoremap <silent> -# :s/^#//<cr>:noh<cr>
-"""""""""""""""""""""""""""""""""""""""""""""""
-"""" key bindings""""""""""""""""""""""""""""""
-let mapleader = ","
-" open fzf finder, simulate cmd+shift+p
-nnoremap <leader>p :Files<CR>
-nnoremap <leader>f :Rg<SPACE>
 
-""""""""""""""""""""""""""""""""""""""""""""""
-"""" Defaults"""""
-syntax on
-set number relativenumber " line numbers
-set hlsearch " highlight searched text
-set incsearch " search text incrementally
-set ignorecase " case insensitive search
-set smartcase
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-set smartindent
-set nowrap
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
-
-"set colorcolumn=80
-"highlight ColorColumn ctermbg=7
 
