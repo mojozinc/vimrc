@@ -42,8 +42,8 @@ vnoremap <silent> -# :s/^#//<cr>:noh<cr>
 """" key bindings""""""""""""""""""""""""""""""
 let mapleader = ","
 " open fzf finder, simulate cmd+shift+p
-nmap <leader>p :Files<CR>
-nmap <leader>f :Rg<SPACE>
+nmap <leader>p :GFiles<CR>
+nmap <leader><space> :Rg<SPACE>
 map <C-d> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 """" Defaults"""""
