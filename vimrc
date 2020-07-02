@@ -9,11 +9,15 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'vim-airline/vim-airline'
 Plug 'skywind3000/vim-preview'
 Plug 'lifepillar/vim-mucomplete'
+Plug 'jeetsukumaran/vim-pythonsense'
+Plug 'mbbill/undotree'
+Plug 'puremourning/vimspector'
+Plug 'ap/vim-css-color'
 " needs nvim
-" Plug 'ThePrimeagen/vim-be-good'
+Plug 'ThePrimeagen/vim-be-good'
 "Plug 'git@github.com:Valloric/YouCompleteMe.git'
 call plug#end()
-
+let g:vimspector_enable_mappings = 'HUMAN'
 if executable('rg')
     let g:rg_derive_root='true'
 endif
@@ -44,6 +48,8 @@ let mapleader = ","
 " open fzf finder, simulate cmd+shift+p
 nmap <leader>p :GFiles<CR>
 nmap <leader><space> :Rg<SPACE>
+nmap <leader>s :Rg <C-R>=expand("<cword>")<CR><CR>
+nmap <C-f> :BLines<CR>
 map <C-d> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 """" Defaults"""""
@@ -61,7 +67,7 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set cursorline
-
+set splitright
 
 "set colorcolumn=80
 "highlight ColorColumn ctermbg=7
@@ -79,8 +85,9 @@ endfunction
 
 autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
 autocmd FileType jsonl nnoremap <buffer> <F5> :call JsonLineView()<CR>
-autocmd BufNewFile,BufRead Dockerfile* set filetype=dockerfile
-autocmd BufNewFile,BufRead Dockerfile* set syntax=dockerfile
+autocmd BufNewFile,BufRead *Dockerfile* set filetype=dockerfile
+autocmd BufNewFile,BufRead *Dockerfile* set syntax=dockerfile
+" autocmd BufWritePost * !run_tests.sh <afile>
 
 " toggle relativenumber
 augroup numbertoggle
