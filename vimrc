@@ -13,6 +13,8 @@ Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'mbbill/undotree'
 Plug 'puremourning/vimspector'
 Plug 'ap/vim-css-color'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 " needs nvim
 Plug 'ThePrimeagen/vim-be-good'
 "Plug 'git@github.com:Valloric/YouCompleteMe.git'
