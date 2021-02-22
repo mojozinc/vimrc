@@ -14,6 +14,7 @@ Plug 'mbbill/undotree'
 Plug 'puremourning/vimspector'
 Plug 'ap/vim-css-color'
 Plug 'vimwiki/vimwiki'
+Plug 'justinmk/vim-sneak'
 " Typescript setup
 Plug 'pangloss/vim-javascript' 
 Plug 'leafgarland/typescript-vim'
