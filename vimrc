@@ -13,8 +13,12 @@ Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'mbbill/undotree'
 Plug 'puremourning/vimspector'
 Plug 'ap/vim-css-color'
+Plug 'vimwiki/vimwiki'
+" Typescript setup
+Plug 'pangloss/vim-javascript' 
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 " needs nvim
 Plug 'ThePrimeagen/vim-be-good'
 "Plug 'git@github.com:Valloric/YouCompleteMe.git'
@@ -56,7 +60,8 @@ map <C-d> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 """" Defaults"""""
 syntax on
-set number relativenumber " line numbers
+" set number relativenumber " line numbers
+set number
 set hlsearch " highlight searched text
 set incsearch " search text incrementally
 set ignorecase " case insensitive search
