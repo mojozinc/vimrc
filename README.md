@@ -3,7 +3,7 @@ contents of .vim directory
 
 First install vim plug manually from here -> https://github.com/junegunn/vim-plug
 
-add the below to ~/.config/init.vim and/or ~/.config/nvim/init.vim
+contents of ~/.config/nvim/init.vim
 ```
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
