@@ -107,7 +107,7 @@ autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
 " run python auto save
 function! TogglePythonSaveGroup()
-    if !exists('#PythonSaveGroupp#BufEnter')
+    if !exists('#PythonSaveGroup#BufWritePost')
         augroup PythonSaveGroup | au!
             autocmd BufWritePost *.py !black <afile>:p:S
         augroup end
@@ -118,7 +118,7 @@ function! TogglePythonSaveGroup()
     endif
 endfunction
 
-call TogglePythonSaveGroup()
+" call TogglePythonSaveGroup()
 
 
 
