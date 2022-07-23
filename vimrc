@@ -15,6 +15,8 @@ Plug 'puremourning/vimspector'
 Plug 'ap/vim-css-color'
 Plug 'vimwiki/vimwiki'
 Plug 'justinmk/vim-sneak'
+Plug 'psf/black', {'branch': 'main'}
+Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
 " Typescript setup
 Plug 'pangloss/vim-javascript' 
 Plug 'leafgarland/typescript-vim'
@@ -25,6 +27,7 @@ Plug 'ThePrimeagen/vim-be-good'
 "Plug 'git@github.com:Valloric/YouCompleteMe.git'
 call plug#end()
 let g:vimspector_enable_mappings = 'HUMAN'
+let g:python3_host_prog = 'python3'
 if executable('rg')
     let g:rg_derive_root='true'
 endif
@@ -54,6 +57,7 @@ vnoremap <silent> -# :s/^#//<cr>:noh<cr>
 let mapleader = ","
 " open fzf finder, simulate cmd+shift+p
 nmap <leader>p :GFiles<CR>
+nmap <leader>t :Buffers<CR>
 nmap <leader><space> :Rg<SPACE>
 nmap <leader>s :Rg <C-R>=expand("<cword>")<CR><CR>
 nmap <C-f> :BLines<CR>
@@ -61,8 +65,7 @@ map <C-d> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 """" Defaults"""""
 syntax on
-" set number relativenumber " line numbers
-set number
+set number norelativenumber " line numbers
 set hlsearch " highlight searched text
 set incsearch " search text incrementally
 set ignorecase " case insensitive search
@@ -92,20 +95,30 @@ function JsonLineView()
 endfunction
 
 autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
-autocmd FileType jsonl nnoremap <buffer> <F5> :call JsonLineView()<CR>
+autocmd BufNewFile,BufRead *.ndjson call SetJsonLOptions()
+autocmd FileType ndjson nnoremap <buffer> <F5> :call JsonLineView()<CR>
 autocmd BufNewFile,BufRead *Dockerfile* set filetype=dockerfile
 autocmd BufNewFile,BufRead *Dockerfile* set syntax=dockerfile
 " autocmd BufWritePost * !run_tests.sh <afile>
 
-" toggle relativenumber
-augroup numbertoggle
-    au!
-    autocmd BufEnter,FocusGained * set relativenumber
-    autocmd BufLeave,FocusLost * set norelativenumber
-augroup END
-
 " to preview ack results
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+
+" run python auto save
+function! TogglePythonSaveGroup()
+    if !exists('#PythonSaveGroupp#BufEnter')
+        augroup PythonSaveGroup | au!
+            autocmd BufWritePost *.py !black <afile>:p:S
+        augroup end
+    else
+        augroup PythonSaveGroup | au!
+            autocmd!
+        augroup end
+    endif
+endfunction
+
+call TogglePythonSaveGroup()
+
 
 
