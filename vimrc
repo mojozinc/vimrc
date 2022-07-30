@@ -10,13 +10,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'skywind3000/vim-preview'
 Plug 'davidhalter/jedi-vim'
 "Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'mbbill/undotree'
-Plug 'puremourning/vimspector'
-Plug 'ap/vim-css-color'
+"Plug 'puremourning/vimspector'
 Plug 'vimwiki/vimwiki'
 Plug 'justinmk/vim-sneak'
-Plug 'psf/black', {'branch': 'main'}
-Plug 'averms/black-nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'psf/black', {'branch': 'stable'}
 " Typescript setup
 Plug 'pangloss/vim-javascript' 
 Plug 'leafgarland/typescript-vim'
@@ -25,15 +22,20 @@ Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 " needs nvim
 Plug 'ThePrimeagen/vim-be-good'
 "Plug 'git@github.com:Valloric/YouCompleteMe.git'
+Plug 'rust-lang/rust.vim'
 call plug#end()
-let g:vimspector_enable_mappings = 'HUMAN'
+"let g:vimspector_enable_mappings = 'HUMAN'
 let g:python3_host_prog = 'python3'
 if executable('rg')
     let g:rg_derive_root='true'
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline=%{FugitiveStatusline()}
+" StatusLines
+"set statusline=%{FugitiveStatusline()}
+" add custom data - https://github.com/vim-airline/vim-airline#straightforward-customization
+" list buffers in tabline
+let g:airline#extensions#tabline#enabled = 1
 """"""""""""""""""""display whitespace character"""""""""""""""""""""""""""""""
 " set list 
 " set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
@@ -94,6 +96,11 @@ function JsonLineView()
      set filetype=json
 endfunction
 
+function PPTMode()
+    set number relativenumber
+    set scrolloff=999
+endfunction
+
 autocmd BufNewFile,BufRead *.jsonl call SetJsonLOptions()
 autocmd BufNewFile,BufRead *.ndjson call SetJsonLOptions()
 autocmd FileType ndjson nnoremap <buffer> <F5> :call JsonLineView()<CR>
@@ -118,7 +125,20 @@ function! TogglePythonSaveGroup()
     endif
 endfunction
 
-" call TogglePythonSaveGroup()
+function! GetPythonSaveStatus()
+    if exists('#PythonSaveGroup#BufWritePost') && (&filetype=='python')
+        return '| format on save'
+    else
+        return ''
+    endif
+endfunction
+command BlackToggle execute 'call TogglePythonSaveGroup()'
+BlackToggle
+call airline#parts#define_function('python_black', 'GetPythonSaveStatus')
+let g:airline_section_y = airline#section#create_right(['ffenc','python_black'])
 
+" --------------------------------------
 
-
+augroup RustSaveGroup | au!
+    autocmd BufWritePost *.rs :RustFmt
+augroup end
